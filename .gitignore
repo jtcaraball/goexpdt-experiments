@@ -1,0 +1,7 @@
+# Ignore experiment output and input content
+io/output/*
+!io/output/.include
+io/input/*
+!io/input/.include
+!io/input/mnist_d0_n400.json
+!io/input/mnist_d0_input.txt
