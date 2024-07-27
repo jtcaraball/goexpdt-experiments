@@ -4,7 +4,6 @@ import (
 	"io"
 	"os"
 	"path"
-	"strings"
 	"time"
 )
 
@@ -25,7 +24,7 @@ type experiment struct {
 // Run the experiment over the set of inputs and using the options contained in
 // args.
 func (e experiment) Run(args ...string) error {
-	ts := strings.Join(strings.Split(time.Now().String(), " ")[:2], "_")
+	ts := dateTimeAsString(time.Now())
 	outp := path.Join(outputdir, e.Name+"_"+ts+".csv")
 
 	of, err := os.Create(outp)

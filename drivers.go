@@ -43,7 +43,7 @@ func (d randCompValDriver) Run(
 			"tree_dim",
 			"tree_nodes",
 			"iter",
-			"time",
+			"time (ns)",
 			"value",
 		},
 	); err != nil {
@@ -141,7 +141,7 @@ func (d randStatsDriver) Run(
 			"iter",
 			"#bots",
 			"#calls",
-			"time",
+			"time (ns)",
 		},
 	); err != nil {
 		return err
@@ -185,6 +185,7 @@ func (d randStatsDriver) eval(
 		if err != nil {
 			return fmt.Errorf("Compute error: %s", err.Error())
 		}
+		ts := strconv.Itoa(int(time.Since(t)))
 
 		if err = w.Write(
 			[]string{
@@ -194,7 +195,7 @@ func (d randStatsDriver) eval(
 				strconv.Itoa(i),
 				strconv.Itoa(out.Value.BotCount()),
 				strconv.Itoa(out.Calls),
-				strconv.Itoa(int(time.Since(t))),
+				ts,
 			},
 		); err != nil {
 			return err
@@ -224,7 +225,7 @@ func (d compValDriver) Run(out io.Writer, solver string, args ...string) error {
 	w := csv.NewWriter(out)
 
 	if err := w.Write(
-		[]string{"file_name", "tree_dim", "tree_nodes", "time", "value"},
+		[]string{"file_name", "tree_dim", "tree_nodes", "time (ns)", "value"},
 	); err != nil {
 		return err
 	}
@@ -266,9 +267,10 @@ func (d compValDriver) eval(ip, solver string, w *csv.Writer) error {
 		if out.Found {
 			val = out.Value.AsString()
 		}
+		ts := strconv.Itoa(int(time.Since(t)))
 
 		if err = w.Write(
-			[]string{ip, dim, nc, strconv.Itoa(int(time.Since(t))), val},
+			[]string{ip, dim, nc, ts, val},
 		); err != nil {
 			return err
 		}
