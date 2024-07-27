@@ -7,6 +7,7 @@ import (
 	"goexpdt-experiments/tree"
 	"math/rand"
 	"os"
+	"time"
 
 	"github.com/jtcaraball/goexpdt/compute"
 	"github.com/jtcaraball/goexpdt/query"
@@ -219,4 +220,12 @@ func scanTIFile(path string) (string, []string, error) {
 	}
 
 	return treeFP, instStrings, nil
+}
+
+// dateTimeAsString returns a formated string representing the t.
+func dateTimeAsString(t time.Time) string {
+	y, m, d := t.Date()
+	h, min, s := t.Hour(), t.Minute(), t.Second()
+
+	return fmt.Sprintf("%d-%d-%d_%d:%d:%d", y, int(m), d, h, min, s)
 }
