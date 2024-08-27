@@ -4,7 +4,9 @@ Experiments to showcase the performance of the
 [implementation](https://github.com/jtcaraball/goexpdt) based on the KR2024
 submission "A Uniform Language to Explain Decision Trees".
 
-## Docker  
+![Results](results_figure.png)
+
+## Docker
 
 In order to have a uniform and OS-independent environment for code execution,
 without requiring users to install SAT solvers on their computer, we use
